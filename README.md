@@ -1,2 +1,1 @@
 # Q-rator
-# Q-rator
