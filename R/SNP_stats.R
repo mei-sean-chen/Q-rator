@@ -102,6 +102,7 @@ parent_SNPs_culled <- function(phenotype_data, all_data, map){
 #' parents of the input individual set provided by the phenotype data.
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
+#' @param map Data frame with map data (group number and loci)
 #' @keywords
 #' marker data
 #' allele frequencies
@@ -168,6 +169,7 @@ parent_SNP_summary <- function(phenotype_data, all_data, map){
 #' input individuals provided by the phenotype data.
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
+#' @param map Data frame with map data (group number and loci)
 #' @keywords
 #' marker data
 #' allele frequencies
@@ -175,7 +177,7 @@ parent_SNP_summary <- function(phenotype_data, all_data, map){
 #' @export
 #' @examples
 #' input_SNP_summary()
-input_SNP_summary <- function(phenotype_data, all_data){
+input_SNP_summary <- function(phenotype_data, all_data, map){
   out <- format_out(phenotype_data, all_data)
   Markers <- map_to_SNPs(map)
 
