@@ -6,17 +6,8 @@ Q-rator is an R lang. script that automates creation of files for FlexQTL an
 Aside from updating to the latest version of R, Q-rator requires the packages tibble, shiny, shinyFiles, devtools, roxygen2, and of course, the Q-rator package. Install these packages first with the following code: 
 
 ```
-{
 install.packages("shiny") 
 install.packages("devtools") 
 install.packages("roxygen2") 
 install.packages("tibble") 
-}
-
-
-
-
-
-
-
 ```
