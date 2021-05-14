@@ -3,15 +3,16 @@
 #' Given phenotype and marker data, creates a FlexQTL-ready data frame.
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set
-#' @param start First column of data in phenotype data frame
-#' @param end Last column of data in phenotype data frame
 #' @keywords out
 #' .dat
 #' @export
 #' @examples
-#' format_out(phenotype_data = your_frame, all_data = 20k_8koverlap, start = 2, end = 7)
-format_out <- function(phenotype_data, all_data, start, end){
-
+#' format_out(phenotype_data = your_frame, all_data = 20k_8koverlap)
+format_out <- function(phenotype_data, all_data){
+  
+  start <- 2
+  end <- ncol(phenotype_data)
+  
   total <- fill_pedigree(phenotype_data, all_data)
   N <- length(all_data$X.2)
   filter <- rep(F, N)
@@ -42,7 +43,6 @@ format_out <- function(phenotype_data, all_data, start, end){
     }
     out <- out %>% add_column(phen.insert, .before = "X1")
   }
-  rm(phen.insert, end, start, j, i, columnA)
   out <- out[, colSums(is.na(out)) == 0]
   return(out)
 }
@@ -73,17 +73,16 @@ subset_out_markers <- function(out, markers){
 #' Output may be a subset or supserset of the existing .dat data frame depending on the summary.
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
-#' @param start First column of data in phenotype data frame
-#' @param end Last column of data in phenotype data frame
 #' @param summary SNP or marker summary as data frame
 #' @keywords out
 #' .dat
 #' @export
 #' @examples
 #' update_out_by_summary()
-update_out_by_summary <- function(phenotype_data, all_data, start, end, summary){
+update_out_by_summary <- function(phenotype_data, all_data, summary){
+  
   negative_set <- excluded_markers(summary)$Markers
-  out <- format_out(phenotype_data, all_data, start, end)
+  out <- format_out(phenotype_data, all_data)
   filter <- rep(T, length(out))
   for(x in 1:length(out)){
     if(as.character(out[1, x]) %in% negative_set){

@@ -4,16 +4,12 @@
 \alias{parent_SNP_summary}
 \title{Parent Marker Summary}
 \usage{
-parent_SNP_summary(phenotype_data, all_data, map, start, end)
+parent_SNP_summary(phenotype_data, all_data, map)
 }
 \arguments{
 \item{phenotype_data}{Data frame with phenotype data on all input individuals}
 
 \item{all_data}{Marker data set as data frame}
-
-\item{start}{First column of data in phenotype data frame}
-
-\item{end}{Last column of data in phenotype data frame}
 }
 \description{
 Creates a data frame that summarizes SNP frequencies for the set of all

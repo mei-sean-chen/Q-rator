@@ -4,16 +4,12 @@
 \alias{update_out_by_summary}
 \title{Update Data File By Summary}
 \usage{
-update_out_by_summary(phenotype_data, all_data, start, end, summary)
+update_out_by_summary(phenotype_data, all_data, summary)
 }
 \arguments{
 \item{phenotype_data}{Data frame with phenotype data on all input individuals}
 
 \item{all_data}{Marker data set as data frame}
-
-\item{start}{First column of data in phenotype data frame}
-
-\item{end}{Last column of data in phenotype data frame}
 
 \item{summary}{SNP or marker summary as data frame}
 }

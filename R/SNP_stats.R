@@ -47,16 +47,14 @@ to_extract_parent_homozygous <- function(summary){
 #' contains only parents of the input set, and corresponding marker data
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
-#' @param start First column of data in phenotype data frame
-#' @param end Last column of data in phenotype data frame
 #' @keywords
 #' summary
 #' marker data
 #' @export
 #' @examples
 #' first_parent_SNP_data()
-first_parent_SNP_data <- function(phenotype_data, all_data, start, end){
-  out <- format_out(phenotype_data, all_data, start, end)
+first_parent_SNP_data <- function(phenotype_data, all_data){
+  out <- format_out(phenotype_data, all_data)
 
   filtered.all.ind <- input_align_parents(phenotype_data, all_data)
   FirstParents <- get_parents(filtered.all.ind)
@@ -80,17 +78,15 @@ first_parent_SNP_data <- function(phenotype_data, all_data, start, end){
 #' contains only parents of the input set, and only homozygous markers
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
-#' @param start First column of data in phenotype data frame
-#' @param end Last column of data in phenotype data frame
 #' @keywords
 #' marker data
 #' pedigree
 #' @export
 #' @examples
 #' parent_SNPs_culled()
-parent_SNPs_culled <- function(phenotype_data, all_data, map, start, end){
-  firstParentSNPData <- first_parent_SNP_data(phenotype_data, all_data, start, end)
-  summary <- parent_SNP_summary(phenotype_data, all_data, map, start, end)
+parent_SNPs_culled <- function(phenotype_data, all_data, map){
+  firstParentSNPData <- first_parent_SNP_data(phenotype_data, all_data)
+  summary <- parent_SNP_summary(phenotype_data, all_data, map)
   extract_these <- to_extract_parent_homozygous(summary)
   filter <- c(F, rep(T, 3), rep(F, length(firstParentSNPData[2,]) - 4))
   for(x in 12:length(filter)){
@@ -106,8 +102,6 @@ parent_SNPs_culled <- function(phenotype_data, all_data, map, start, end){
 #' parents of the input individual set provided by the phenotype data.
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
-#' @param start First column of data in phenotype data frame
-#' @param end Last column of data in phenotype data frame
 #' @keywords
 #' marker data
 #' allele frequencies
@@ -116,9 +110,9 @@ parent_SNPs_culled <- function(phenotype_data, all_data, map, start, end){
 #' @export
 #' @examples
 #' parent_SNPs_summary()
-parent_SNP_summary <- function(phenotype_data, all_data, map, start, end){
+parent_SNP_summary <- function(phenotype_data, all_data, map){
 
-  firstParentSNPData <- first_parent_SNP_data(phenotype_data, all_data, start, end)
+  firstParentSNPData <- first_parent_SNP_data(phenotype_data, all_data)
 
   Markers <- map_to_SNPs(map)
 
@@ -174,8 +168,6 @@ parent_SNP_summary <- function(phenotype_data, all_data, map, start, end){
 #' input individuals provided by the phenotype data.
 #' @param phenotype_data Data frame with phenotype data on all input individuals
 #' @param all_data Marker data set as data frame
-#' @param start First column of data in phenotype data frame
-#' @param end Last column of data in phenotype data frame
 #' @keywords
 #' marker data
 #' allele frequencies
@@ -183,8 +175,8 @@ parent_SNP_summary <- function(phenotype_data, all_data, map, start, end){
 #' @export
 #' @examples
 #' input_SNP_summary()
-input_SNP_summary <- function(phenotype_data, all_data, map, start, end){
-  out <- format_out(phenotype_data, all_data, start, end)
+input_SNP_summary <- function(phenotype_data, all_data){
+  out <- format_out(phenotype_data, all_data)
   Markers <- map_to_SNPs(map)
 
   map <- map_format(map)
@@ -202,7 +194,7 @@ input_SNP_summary <- function(phenotype_data, all_data, map, start, end){
   input.SNPs.frame <- matrix(toMatrix, nrow = length(Markers), ncol = 7)
   input.SNPs.frame <- data.frame(input.SNPs.frame)
   colnames(input.SNPs.frame) <- c("A A", "A B", "B B", "A C", "B C", "C C", "- -")
-  for(s in 1:length(Markers)){
+  for(s in 1:length(SNPs)){
     thisRow <- rep(0, 7)
     thisColumn <- inputIndicesData[, s+11]
     for(t in 1:length(thisColumn)){

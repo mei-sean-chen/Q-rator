@@ -4,22 +4,18 @@
 \alias{format_out}
 \title{Format Out}
 \usage{
-format_out(phenotype_data, all_data, start, end)
+format_out(phenotype_data, all_data)
 }
 \arguments{
 \item{phenotype_data}{Data frame with phenotype data on all input individuals}
 
 \item{all_data}{Marker data set}
-
-\item{start}{First column of data in phenotype data frame}
-
-\item{end}{Last column of data in phenotype data frame}
 }
 \description{
 Given phenotype and marker data, creates a FlexQTL-ready data frame.
 }
 \examples{
-format_out(phenotype_data = your_frame, all_data = 20k_8koverlap, start = 2, end = 7)
+format_out(phenotype_data = your_frame, all_data = 20k_8koverlap)
 }
 \keyword{.dat}
 \keyword{out}

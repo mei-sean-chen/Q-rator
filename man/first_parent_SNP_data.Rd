@@ -4,16 +4,12 @@
 \alias{first_parent_SNP_data}
 \title{Assemble parent marker data}
 \usage{
-first_parent_SNP_data(phenotype_data, all_data, start, end)
+first_parent_SNP_data(phenotype_data, all_data)
 }
 \arguments{
 \item{phenotype_data}{Data frame with phenotype data on all input individuals}
 
 \item{all_data}{Marker data set as data frame}
-
-\item{start}{First column of data in phenotype data frame}
-
-\item{end}{Last column of data in phenotype data frame}
 }
 \description{
 Creates a data frame subset of the curated output .dat frame, which
