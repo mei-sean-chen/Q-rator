@@ -114,7 +114,9 @@ parent_SNPs_culled <- function(phenotype_data, all_data, map){
 parent_SNP_summary <- function(phenotype_data, all_data, map){
 
   firstParentSNPData <- first_parent_SNP_data(phenotype_data, all_data)
-
+  
+  num_phen_columns <- ncol(phenotype_data) - 1
+  
   Markers <- map_to_SNPs(map)
 
   toMatrix <- rep(0, 7*length(Markers))
@@ -124,7 +126,7 @@ parent_SNP_summary <- function(phenotype_data, all_data, map){
 
   for(s in 1:length(Markers)){
     thisRow <- rep(0, 7)
-    thisColumn <- firstParentSNPData[, s+11]
+    thisColumn <- firstParentSNPData[, s+num_phen_columns+5]
     for(t in 1:length(thisColumn)){
       switch(as.character(thisColumn[t]),
              "A A" = {
@@ -178,6 +180,7 @@ parent_SNP_summary <- function(phenotype_data, all_data, map){
 #' @examples
 #' input_SNP_summary()
 input_SNP_summary <- function(phenotype_data, all_data, map){
+  num_phen_columns <- ncol(phenotype_data) - 1
   out <- format_out(phenotype_data, all_data)
   Markers <- map_to_SNPs(map)
 
@@ -198,7 +201,7 @@ input_SNP_summary <- function(phenotype_data, all_data, map){
   colnames(input.SNPs.frame) <- c("A A", "A B", "B B", "A C", "B C", "C C", "- -")
   for(s in 1:length(Markers)){
     thisRow <- rep(0, 7)
-    thisColumn <- inputIndicesData[, s+11]
+    thisColumn <- inputIndicesData[, s+num_phen_columns+5]
     for(t in 1:length(thisColumn)){
       switch(as.character(thisColumn[t]),
              "A A" = {
