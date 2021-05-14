@@ -196,7 +196,7 @@ input_SNP_summary <- function(phenotype_data, all_data, map){
   input.SNPs.frame <- matrix(toMatrix, nrow = length(Markers), ncol = 7)
   input.SNPs.frame <- data.frame(input.SNPs.frame)
   colnames(input.SNPs.frame) <- c("A A", "A B", "B B", "A C", "B C", "C C", "- -")
-  for(s in 1:length(SNPs)){
+  for(s in 1:length(Markers)){
     thisRow <- rep(0, 7)
     thisColumn <- inputIndicesData[, s+11]
     for(t in 1:length(thisColumn)){
